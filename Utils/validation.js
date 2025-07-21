@@ -1,6 +1,9 @@
 const validateWord = (word) => {
     if (typeof word !== 'string' || !word || word === undefined || word === null || !isNaN(word) || word === '')
         throw new Error('Error: word is not valid');
+    if (/[^a-zA-Z0-9]/.test(word)) {
+        throw new Error('Error: word contains special characters');
+    }
     return true;
 }
 
