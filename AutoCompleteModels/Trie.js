@@ -1,4 +1,5 @@
-const { validateWord } = require("../Utils/validation");
+const trieService = require("../Services/trieService");
+const validationUtils = require("../Utils/validation");
 const TrieNode = require("./TrieNode");
 
 class Trie {
@@ -8,14 +9,15 @@ class Trie {
 
     addWord(word) {
         try {
-            validateWord(word);
+            validationUtils.validateWord(word);
+            validationUtils.cleanWord(word);
 
             let currentNode = this.root;
             let insertedNewNode = false;
 
             for (let i = 0; i < word.length; i++) {
                 if (!currentNode.hasKey(word[i])) {
-                    this._insertRemainingWordToNewPath(word, i, currentNode);
+                    trieService.insertRemainingWordToNewPath(word, i, currentNode);
                     insertedNewNode = true;
                     break;
                 }
@@ -23,9 +25,8 @@ class Trie {
             }
 
             // Mark endOfWord if traversed existing path
-            if (!insertedNewNode) {
-                this._checkAndMarkEndOfWord(currentNode, word.length - 1, word.length);
-            }
+            if (!insertedNewNode)
+                trieService.checkAndMarkEndOfWord(currentNode, word.length - 1, word.length);
 
             return true;
         } catch (error) {
@@ -34,20 +35,7 @@ class Trie {
         }
     }
 
-    _insertRemainingWordToNewPath(word, indexToStart, node) {
-        let currentNode = node;
-        for (let i = indexToStart; i < word.length; i++) {
-            let char = word[i];
-            const newNode = new TrieNode(char);
-            this._checkAndMarkEndOfWord(newNode, i, word.length) //last char of the word
-            currentNode.children[char] = newNode;
-            currentNode = currentNode.children[char];
-        }
-    }
 
-    _checkAndMarkEndOfWord(node, currentIndex, wordLength) {
-        if (currentIndex === wordLength - 1) node.endOfWord = true;
-    }
 
     findWord(word) {
 
