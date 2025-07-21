@@ -10,7 +10,7 @@ class Trie {
     addWord(word) {
         try {
             validationUtils.validateWord(word);
-            validationUtils.cleanWord(word);
+            word = validationUtils.cleanWord(word);
 
             let currentNode = this.root;
             let insertedNewNode = false;
@@ -35,10 +35,24 @@ class Trie {
         }
     }
 
-
-
     findWord(word) {
+        try {
+            validationUtils.validateWord(word);
+            word = validationUtils.cleanWord(word);
 
+            let currentNode = this.root;
+            for (const char of word) {
+                if (!currentNode.hasKey(char)) return false;
+                currentNode = currentNode.children[char];
+            }
+            // necessary?
+            //return currentNode.endOfWord === true;
+            return true;
+
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 
     predictWords(prefix) {
