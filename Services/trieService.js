@@ -16,9 +16,19 @@ function checkAndMarkEndOfWord(node, currentIndex, wordLength) {
     if (currentIndex === wordLength - 1) node.endOfWord = true;
 }
 
+function getRemainingTree(prefix, node){
+    // 
+}
+
+function allWordsHelper(prefix, node, allWords){
+
+}
+
 
 
 module.exports = {
     insertRemainingWordToNewPath,
     checkAndMarkEndOfWord,
+    getRemainingTree,
+    allWordsHelper,
 }

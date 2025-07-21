@@ -58,14 +58,6 @@ class Trie {
     predictWords(prefix) {
 
     }
-
-    _getRemainingTree(prefix, node) {
-
-    }
-
-    _allWordsHelper(prefix, node, allWords) {
-
-    }
 }
 
 
