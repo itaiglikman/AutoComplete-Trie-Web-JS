@@ -10,19 +10,27 @@ class Trie {
         try {
             validateWord(word);
 
-            // define current node as root
             let currentNode = this.root;
+            let insertedNewNode = false;
 
-            // run over the arr 
             for (let i = 0; i < word.length; i++) {
-                if (!currentNode.hasKey(word[i])) { //if current does'nt exists
+                if (!currentNode.hasKey(word[i])) {
                     this._insertRemainingWordToNewPath(word, i, currentNode);
+                    insertedNewNode = true;
                     break;
                 }
                 currentNode = currentNode.children[word[i]];
             }
+
+            // Mark endOfWord if traversed existing path
+            if (!insertedNewNode) {
+                this._checkAndMarkEndOfWord(currentNode, word.length - 1, word.length);
+            }
+
+            return true;
         } catch (error) {
             console.error(error.message);
+            return false;
         }
     }
 
