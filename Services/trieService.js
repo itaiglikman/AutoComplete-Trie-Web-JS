@@ -1,9 +1,11 @@
+const TrieNode = require("../AutoCompleteModels/TrieNode");
+
 function insertRemainingWordToNewPath(word, indexToStart, node) {
     let currentNode = node;
     for (let i = indexToStart; i < word.length; i++) {
         let char = word[i];
         const newNode = new TrieNode(char);
-        this._checkAndMarkEndOfWord(newNode, i, word.length) //last char of the word
+        checkAndMarkEndOfWord(newNode, i, word.length) //last char of the word
         currentNode.children[char] = newNode;
         currentNode = currentNode.children[char];
     }
