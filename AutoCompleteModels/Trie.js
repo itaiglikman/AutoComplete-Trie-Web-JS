@@ -1,3 +1,4 @@
+const { validateWord } = require("../Utils/validation");
 const TrieNode = require("./TrieNode");
 
 class Trie {
@@ -6,19 +7,22 @@ class Trie {
     }
 
     addWord(word) {
-        if (!word) throw 'error: no word sent';
-        if (word.length === 0) throw 'error: word is too short';
+        try {
+            validateWord(word);
 
-        // define current node as root
-        let currentNode = this.root;
+            // define current node as root
+            let currentNode = this.root;
 
-        // run over the arr 
-        for (let i = 0; i < word.length; i++) {
-            if (!currentNode.hasKey(word[i])) { //if current does'nt exists
-                this._insertRemainingWordToNewPath(word, i, currentNode);
-                break;
+            // run over the arr 
+            for (let i = 0; i < word.length; i++) {
+                if (!currentNode.hasKey(word[i])) { //if current does'nt exists
+                    this._insertRemainingWordToNewPath(word, i, currentNode);
+                    break;
+                }
+                currentNode = currentNode.children[word[i]];
             }
-            currentNode = currentNode.children[word[i]];
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
