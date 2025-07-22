@@ -61,7 +61,8 @@ class Trie {
             prefix = validationUtils.cleanWord(prefix);
 
             const prefixLastNode = trieService.getRemainingTree(prefix, this.root);
-            return prefixLastNode;
+            const wordsArr = trieService.allWordsHelper(prefix, prefixLastNode, []);
+            return wordsArr;
         } catch (error) {
             console.error(error);
             return false;
