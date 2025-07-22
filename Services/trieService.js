@@ -18,14 +18,24 @@ function checkAndMarkEndOfWord(node, currentIndex, wordLength) {
 
 function getRemainingTree(prefix, node) {
     for (const char of prefix) {
-        if(!node.hasKey(char)) throw new Error("Error: prefix doesn't exist in the trie");
+        if (!node.hasKey(char)) throw new Error("Error: prefix doesn't exist in the trie");
         node = node.children[char];
     }
     return node;
 }
 
-function allWordsHelper(prefix, node, allWords) {
+function allWordsHelper(prefix, node, allWords = []) {
+    if (node.endOfWord) allWords.push(prefix);
 
+    // return when no more children
+    if (!node.hasChildren()) return allWords;
+
+    const nodeChildrenCharsArr = node.getChildrenKeys();
+    for (const char of nodeChildrenCharsArr) {
+        const child = node.children[char];
+        allWordsHelper(prefix + child.value, child, allWords)
+    }
+    return allWords;
 }
 
 
