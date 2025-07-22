@@ -56,7 +56,16 @@ class Trie {
     }
 
     predictWords(prefix) {
+        try {
+            validationUtils.validateWord(prefix);
+            prefix = validationUtils.cleanWord(prefix);
 
+            const prefixLastNode = trieService.getRemainingTree(prefix, this.root);
+            return prefixLastNode;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 }
 
