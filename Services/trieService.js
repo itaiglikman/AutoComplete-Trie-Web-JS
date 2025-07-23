@@ -11,14 +11,13 @@ function insertRemainingWordToNewPath(word, indexToStart, node) {
     }
 }
 
-
 function checkAndMarkEndOfWord(node, currentIndex, wordLength) {
     if (currentIndex === wordLength - 1) node.endOfWord = true;
 }
 
 function getRemainingTree(prefix, node) {
     for (const char of prefix) {
-        if (!node.hasKey(char)) throw new Error("Error: prefix doesn't exist in the trie");
+        if (!node.hasKey(char)) return;
         node = node.children[char];
     }
     return node;
@@ -37,8 +36,6 @@ function allWordsHelper(prefix, node, allWords = []) {
     }
     return allWords;
 }
-
-
 
 module.exports = {
     insertRemainingWordToNewPath,
