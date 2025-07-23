@@ -5,26 +5,17 @@ class TrieNode {
         this.endOfWord = false; // true when end of word
     }
 
-    // /**
-    //  * @param {string} val
-    //  */
-    // set value(val){
-    // only 1 char
-    // has to be letter
-    // }
-
     getChildrenKeys() {
         return Object.keys(this.children)
     }
 
     hasChildren() {
-        return this.getChildrenKeys().length === 0 ? false : true;
+        return this.getChildrenKeys().length > 0;
     }
 
     hasKey(key) {
         return Object.hasOwn(this.children, key)
     }
 }
-
 
 module.exports = TrieNode;
