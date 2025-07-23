@@ -28,10 +28,9 @@ class Trie {
             if (!insertedNewNode)
                 trieService.checkAndMarkEndOfWord(currentNode, word.length - 1, word.length);
 
-            return true;
+            return word;
         } catch (error) {
-            console.error(error.message);
-            return false;
+            console.log(error);
         }
     }
 
@@ -45,20 +44,28 @@ class Trie {
                 if (!currentNode.hasKey(char)) return false;
                 currentNode = currentNode.children[char];
             }
-            // necessary?
-            //return currentNode.endOfWord === true;
-            return true;
+            return currentNode.endOfWord ? true : false;
 
         } catch (error) {
-            console.error(error);
+            console.log(error);
             return false;
         }
     }
 
     predictWords(prefix) {
+        try {
+            validationUtils.validateWord(prefix);
+            prefix = validationUtils.cleanWord(prefix);
 
+            const prefixLastNode = trieService.getRemainingTree(prefix, this.root);
+            if (!prefixLastNode) return [];
+            const wordsArr = trieService.allWordsHelper(prefix, prefixLastNode, []);
+            return wordsArr;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
     }
 }
-
 
 module.exports = Trie;
