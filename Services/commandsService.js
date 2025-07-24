@@ -1,9 +1,6 @@
+import * as printCommands from "../Commands/commandsHandler.js";
 import * as errorMessages from "../Utils/errors.js";
 import * as validate from "../Utils/validation.js";
-import * as printCommands from "../Commands/commandsHandler.js";
-import Trie from '../AutoCompleteModels/Trie.js';
-
-// const prompt = promptSync();
 
 export function handleNewCommand() {
     try {
@@ -11,9 +8,10 @@ export function handleNewCommand() {
         let [action, data] = digestCommand(command);
         return [action, data];
     } catch (error) {
-        if (!command) errorMessages.invalidCommand();
-        console.log(error);
-        return [];
+        if (!command) throw errorMessages.invalidCommand();
+        throw error;
+        // console.log(error);
+        // return [];
     }
 }
 
@@ -32,6 +30,8 @@ export function handleAdd(word, trie) {
         if (newWord) printCommands.add(newWord);
         return newWord;
     } catch (error) {
+        throw error;
+        // console.log('err here');
         console.log(error);
     }
 }
@@ -42,7 +42,8 @@ export function handleFind(word, trie) {
         if (isFound !== undefined) printCommands.find(isFound, word);
         return isFound;
     } catch (error) {
-        console.log(error);
+        throw error;
+        // console.log(error);
     }
 }
 
@@ -52,7 +53,8 @@ export function handleComplete(prefix, trie) {
         printCommands.complete(wordsArr, prefix);
         return wordsArr;
     } catch (error) {
-        console.log(error);
+        throw error;
+        // console.log(error);
     }
 }
 
@@ -67,7 +69,8 @@ export function digestCommand(command) {
         if (!data) data = undefined;
         return [action, data];
     } catch (error) {
-        console.log(error);
-        return [];
+        throw error;
+        // console.log(error);
+        // return [];
     }
 }

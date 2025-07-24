@@ -30,7 +30,9 @@ class Trie {
 
             return word;
         } catch (error) {
-            console.log(error);
+            throw error
+            // console.log('addWord trie');
+            // console.log(error);
         }
     }
 
@@ -47,8 +49,9 @@ class Trie {
             return currentNode.endOfWord ? true : false;
 
         } catch (error) {
-            console.log(error);
-            return false;
+            throw error;
+            // console.log(error);
+            // return false;
         }
     }
 
@@ -62,8 +65,9 @@ class Trie {
             const wordsArr = trieService.allWordsHelper(prefix, prefixLastNode, []);
             return wordsArr;
         } catch (error) {
-            console.log(error);
-            return false;
+            throw error;
+            // console.log(error);
+            // return false;
         }
     }
 }
