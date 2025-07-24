@@ -1,6 +1,6 @@
-const trieService = require("../Services/trieService");
-const validationUtils = require("../Utils/validation");
-const TrieNode = require("./TrieNode");
+import * as trieService from "../Services/trieService.js";
+import * as validationUtils from "../Utils/validation.js";
+import TrieNode from "./TrieNode.js";
 
 class Trie {
     constructor() {
@@ -68,4 +68,4 @@ class Trie {
     }
 }
 
-module.exports = Trie;
+export default Trie;

@@ -1,21 +1,21 @@
-const TrieNode = require("../AutoCompleteModels/TrieNode");
+import TrieNode from "../AutoCompleteModels/TrieNode.js";
 
-function insertRemainingWordToNewPath(word, indexToStart, node) {
+export function insertRemainingWordToNewPath(word, indexToStart, node) {
     let currentNode = node;
     for (let i = indexToStart; i < word.length; i++) {
         let char = word[i];
         const newNode = new TrieNode(char);
-        checkAndMarkEndOfWord(newNode, i, word.length) //last char of the word
+        checkAndMarkEndOfWord(newNode, i, word.length); //last char of the word
         currentNode.children[char] = newNode;
         currentNode = currentNode.children[char];
     }
 }
 
-function checkAndMarkEndOfWord(node, currentIndex, wordLength) {
+export function checkAndMarkEndOfWord(node, currentIndex, wordLength) {
     if (currentIndex === wordLength - 1) node.endOfWord = true;
 }
 
-function getRemainingTree(prefix, node) {
+export function getRemainingTree(prefix, node) {
     for (const char of prefix) {
         if (!node.hasKey(char)) return;
         node = node.children[char];
@@ -23,7 +23,7 @@ function getRemainingTree(prefix, node) {
     return node;
 }
 
-function allWordsHelper(prefix, node, allWords = []) {
+export function allWordsHelper(prefix, node, allWords = []) {
     if (node.endOfWord) allWords.push(prefix);
 
     // return when no more children
@@ -32,14 +32,7 @@ function allWordsHelper(prefix, node, allWords = []) {
     const nodeChildrenCharsArr = node.getChildrenKeys();
     for (const char of nodeChildrenCharsArr) {
         const child = node.children[char];
-        allWordsHelper(prefix + child.value, child, allWords)
+        allWordsHelper(prefix + child.value, child, allWords);
     }
     return allWords;
-}
-
-module.exports = {
-    insertRemainingWordToNewPath,
-    checkAndMarkEndOfWord,
-    getRemainingTree,
-    allWordsHelper,
 }

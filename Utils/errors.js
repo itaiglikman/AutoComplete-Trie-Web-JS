@@ -1,47 +1,37 @@
 const errorSign = `✗`;
 
-const invalidCommand = () => {
+export const invalidCommand = () => {
     return `${errorSign} invalid command`;
-}
+};
 
-const noCommand = () => {
+export const noCommand = () => {
     return `${errorSign} no command was sent`;
-}
+};
 
-const specialCharsCommand = () => {
+export const specialCharsCommand = () => {
     return `${errorSign} command contains special characters`;
-}
-const noAction = () => {
+};
+
+export const noAction = () => {
     return `${errorSign} no action was sent`;
-}
+};
 
-const actionNotExists = (action) => {
+export const actionNotExists = (action) => {
     return `${errorSign} there is no such action '${action}'`;
-}
+};
 
-const noData = () => {
+export const noData = () => {
     return `${errorSign} no data was sent`;
-}
-const invalidData = () => {
+};
+
+export const invalidData = () => {
     return `${errorSign} data is not valid`;
-}
+};
 
-const specialCharsData = () => {
+export const specialCharsData = () => {
     return `${errorSign} data must not contain numbers or special characters`;
-}
+};
 
-const tooManyInputs = () => {
+export const tooManyInputs = () => {
     return `${errorSign} max inputs keys allowed is 2`;
-}
-
-module.exports = {
-    invalidCommand,
-    noCommand,
-    specialCharsCommand,
-    noAction,
-    actionNotExists,
-    noData,
-    tooManyInputs,
-    specialCharsData,
-    invalidData,
-}
+};
