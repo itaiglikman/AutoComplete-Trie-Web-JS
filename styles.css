@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  border: 5px solid green;
+}
+
+body {
+  display: flex;
+}
+
+#container {
+  width: 50%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#container > * {
+  width: 100%;
+  /* border: 1px solid; */
+  display: flex;
+}
+
+#addWordArea {
+  /* height: 100%; */
+  gap: 10px;
+}
+
+#addWordArea > *,
+#wordInDictionaryBlock {
+  border-radius: 5px;
+}
+
+#addWordArea > input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#addWordArea > button {
+  padding: 10px 20px;
+  background-color: #667eea;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+#wordInDictionaryBlock {
+  background-color: #f8fafc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#wordCount {
+  /* font-size: 20px; */
+  font-weight: bold;
+  color: #667eea;
+}
