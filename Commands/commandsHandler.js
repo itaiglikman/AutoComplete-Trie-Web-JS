@@ -7,7 +7,8 @@ Type 'help' for commands`);
 };
 
 export const add = (word) => {
-    console.log(`${successSign} Added '${word}' to dictionary`);
+    return `${successSign} Added '${word}' to dictionary`;
+    // console.log(`${successSign} Added '${word}' to dictionary`);
 };
 
 export const find = (isFound, word) => {
@@ -17,9 +18,9 @@ export const find = (isFound, word) => {
 };
 
 export const complete = (wordsArr, prefix) => {
-    wordsArr.length === 0 ?
-        console.log(`${errorSign} No suggestions for '${prefix}'`) :
-        console.log(`${successSign} Suggestions for '${prefix}': ${wordsArr}`);
+    return wordsArr.length === 0 ?
+        `${errorSign} No suggestions for '${prefix}'` :
+        `${successSign} Suggestions for '${prefix}':`;
 };
 
 export const help = () => {
