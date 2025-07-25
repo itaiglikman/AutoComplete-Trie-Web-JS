@@ -15,16 +15,23 @@
     <div id="container">
 
         <div id="addWordArea">
-            <input type="text" name="word" id="addWordInput" placeholder="Insert a new word">
-            <button id="addWordBtn">Add Word</button>
+            <div id="addWordLineItem" class="lineItem">
+                <input type="text" name="word" id="addWordInput" placeholder="Insert a new word">
+            </div>
+            <div id="addBtnLineItem" class="lineItem">
+                <button id="addWordBtn">Add Word</button>
+            </div>
         </div>
-        <div id="wordInDictionaryBlock">
+
+        <div id="addWordMsgArea" class="lineItem"></div>
+
+        <div id="wordInDictionaryArea">
             <h1 id="wordCount">0</h1>
             <div>Words in Dictionary</div>
         </div>
 
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="app.js" type="module"></script>
 </body>
