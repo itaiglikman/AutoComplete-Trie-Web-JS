@@ -1,22 +1,36 @@
 import Trie from "./AutoCompleteModels/Trie.js";
-import * as printCommands from "./Commands/commandsHandler.js";
+import * as msgHandler from "./Commands/commandsHandler.js";
 import * as commandsService from "./Services/commandsService.js";
 
 const trie = new Trie();
+const addWordArea = $('#addWordArea');
+const addWordInput = $('#addWordInput');
+const wordCountElem = $('#wordCount');
+let wordCount = 0;
+const addWordBtnElem = $('#addWordBtn');
+console.log($('#addWordMsgArea').length);
+
 
 function render() {
-
+    wordCountElem.text(wordCount);
 }
 
-const word = $('#addWordInput');
-
-const addWordBtn = $('#addWordBtn');
-addWordBtn.on('click', () => {
-    console.log('addWord click ');
-    const newWord = commandsService.handleAdd(word.val(), trie);
-    console.log('addWord click ' + newWord);
+addWordBtnElem.on('click', () => {
+    try {
+        const newWord = commandsService.handleAdd(addWordInput.val(), trie);
+        displayAddMsg(msgHandler.add(newWord), false);
+        wordCount++;
+        render()
+    } catch (error) {
+        displayAddMsg(error, true);
+    }
 });
 
-console.log(111);
+function displayAddMsg(text, isErr) {
+    $('#addWordMsgArea')
+        .text(text)
+        .addClass(isErr ? 'errorMsg' : 'successMsg')
+        .removeClass(isErr ? 'successMsg' : 'errorMsg');
+}
 
-// The commented CLI code remains unchanged, but you may need to update require to import if you use it.
+render();
