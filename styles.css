@@ -21,19 +21,17 @@ body {
   padding: 40px 50px;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 #container > * {
   width: 100%;
   display: flex;
   border-radius: 5px;
-  gap: 10px;
+  gap: 1rem;
 }
 
 /* ---------------addWordArea --------------------- */
-#addWordArea {
-}
-
 #addWordLineItem {
   width: 75%;
 }
@@ -54,7 +52,8 @@ body {
   font-size: 1rem;
 }
 
-#addWordArea > .lineItem > input {
+#addWordArea > .lineItem > input,
+#wordSuggestionArea > #wordSuggestionLineItem > input {
   padding: 10px;
 }
 
@@ -66,6 +65,58 @@ body {
   border: none;
 }
 
+/* ---------------addWordMsgArea--------------------- */
+#addWordMsgArea {
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+.errorMsg {
+  padding: 10px;
+  background-color: #fed7d7;
+  color: #752b2c;
+  border: 1px solid #752b2c;
+}
+
+.successMsg {
+  padding: 10px;
+  background-color: #c6f6d4;
+  color: #21543d;
+  border: 1px solid #21543d;
+}
+
+/* ---------------wordSuggestionArea------------------ */
+
+#wordSuggestionArea > #wordSuggestionLineItem {
+  width: 100%;
+}
+
+#wordSuggestionArea {
+  position: static;
+}
+
+#wordSuggestionArea > .dropdown {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #cbd5e0;
+  border-top: none;
+  z-index: 1;
+  padding: 0.5rem;
+}
+
+#wordSuggestionArea > .dropdown > * {
+  border-bottom: 1px solid;
+}
+
+ul{
+    list-style: none;
+}
 /* ---------------wordInDictionaryArea------------------ */
 #wordInDictionaryArea {
   background-color: #f8fafc;
@@ -77,27 +128,4 @@ body {
 #wordCount {
   font-weight: bold;
   color: #667eea;
-}
-
-/* ---------------addWordMsgArea--------------------- */
-#addWordMsgArea {
-  align-items: center;
-  width: 100%;
-  text-align: center;
-}
-
-.errorMsg {
-  padding: 1rem;
-  margin: 1rem 0;
-  background-color: #fed7d7;
-  color: #752b2c;
-  border: 1px solid #752b2c;
-}
-
-.successMsg {
-  padding: 1rem;
-  margin: 1rem 0;
-  background-color: #C6F6D4;
-  color: #21543D;
-  border: 1px solid #21543D;
 }
