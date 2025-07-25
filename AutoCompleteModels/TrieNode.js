@@ -6,7 +6,7 @@ class TrieNode {
     }
 
     getChildrenKeys() {
-        return Object.keys(this.children)
+        return Object.keys(this.children);
     }
 
     hasChildren() {
@@ -14,8 +14,8 @@ class TrieNode {
     }
 
     hasKey(key) {
-        return Object.hasOwn(this.children, key)
+        return Object.hasOwn(this.children, key);
     }
 }
 
-module.exports = TrieNode;
+export default TrieNode;

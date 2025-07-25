@@ -1,6 +1,6 @@
-const trieService = require("../Services/trieService");
-const validationUtils = require("../Utils/validation");
-const TrieNode = require("./TrieNode");
+import * as trieService from "../Services/trieService.js";
+import * as validationUtils from "../Utils/validation.js";
+import TrieNode from "./TrieNode.js";
 
 class Trie {
     constructor() {
@@ -30,7 +30,9 @@ class Trie {
 
             return word;
         } catch (error) {
-            console.log(error);
+            throw error
+            // console.log('addWord trie');
+            // console.log(error);
         }
     }
 
@@ -47,8 +49,9 @@ class Trie {
             return currentNode.endOfWord ? true : false;
 
         } catch (error) {
-            console.log(error);
-            return false;
+            throw error;
+            // console.log(error);
+            // return false;
         }
     }
 
@@ -62,10 +65,11 @@ class Trie {
             const wordsArr = trieService.allWordsHelper(prefix, prefixLastNode, []);
             return wordsArr;
         } catch (error) {
-            console.log(error);
-            return false;
+            throw error;
+            // console.log(error);
+            // return false;
         }
     }
 }
 
-module.exports = Trie;
+export default Trie;
