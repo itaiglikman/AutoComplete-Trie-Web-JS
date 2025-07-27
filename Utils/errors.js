@@ -35,3 +35,7 @@ export const specialCharsData = () => {
 export const tooManyInputs = () => {
     return `${errorSign} max inputs keys allowed is 2`;
 };
+
+export const wordExists = (word) => {
+    return `${errorSign} word already exists in dictionary`;
+};
