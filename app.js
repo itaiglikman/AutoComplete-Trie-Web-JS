@@ -5,58 +5,76 @@ import * as commandsService from "./Services/commandsService.js";
 const trie = new Trie();
 const addWordInput = $('#addWordInput');
 const wordCountElem = $('#wordCount');
-let wordCount = 0;
+const addWordMsgArea = $('#addWordMsgArea');
 const addWordBtnElem = $('#addWordBtn');
 const wordSuggestionArea = $('#wordSuggestionArea');
 const suggestionInput = $('#suggestionInput');
 
+const state = {
+    wordCount: 0,
+    suggestions: [],
+    prefix: '',
+    message: '',
+    messageType: '', // 'success' | 'error'
+    dictionary: []
+};
 
 function render() {
-    wordCountElem.text(wordCount);
+
+    // wordCount
+    wordCountElem.text(state.wordCount);
+
+    // add word
+    if (state.message) {
+        addWordMsgArea
+            .text(state.message)
+            .css('display', 'flex')
+            .removeClass('errorMsg successMsg')
+            .addClass(state.messageType === 'error' ? 'errorMsg' : 'successMsg')
+    } else addWordMsgArea.css('display', 'none');
+
+    // suggestions dropdown
+    removeExistingDropdown();
+    if (state.prefix && state.suggestions.length) {
+        createUl(state.suggestions, state.prefix);
+    }
+
+    if (state.dictionary.length) {
+        let sum = ''
+        state.dictionary.forEach(word => sum += word + ", ")
+        $('#allWords').text(sum)
+    }
+
 
 }
 
 addWordBtnElem.on('click', () => {
     try {
         const newWord = commandsService.handleAdd(addWordInput.val(), trie);
-        displayAddMsg(msgHandler.add(newWord), false);
-        wordCount++;
-        render();
+        state.dictionary.push(newWord);
+        state.messageType = 'success';
+        state.message = msgHandler.add(newWord);
+        state.wordCount++;
     } catch (error) {
-        displayAddMsg(error, true);
+        state.messageType = 'error';
+        state.message = error
     }
+    render();
 });
-
-function displayAddMsg(text, isErr) {
-    $('#addWordMsgArea')
-        .text(text)
-        .css('display', 'flex')
-        .addClass(isErr ? 'errorMsg' : 'successMsg')
-        .removeClass(isErr ? 'successMsg' : 'errorMsg');
-}
 
 suggestionInput.on('input', function () {
     try {
-        const prefix = suggestionInput.val();
-        const wordsArr = commandsService.handleComplete(prefix, trie);
-        prefix ? displayDropdown(wordsArr, prefix) : removeExistingDropdown();
-        render();
+        state.prefix = suggestionInput.val();
+        state.suggestions = commandsService.handleComplete(state.prefix, trie);
     } catch (error) {
-        removeExistingDropdown()
         console.error(error);
     }
+    render();
 });
 
-suggestionInput.on('focusout',()=>{
+suggestionInput.on('focusout', () => {
     removeExistingDropdown();
 })
-
-function displayDropdown(wordsArr, prefix) {
-    removeExistingDropdown();
-    wordsArr.length
-        ? createUl(wordsArr, prefix)
-        : createUl([], prefix);
-}
 
 const removeExistingDropdown = () => wordSuggestionArea.find('.dropdown').remove();
 

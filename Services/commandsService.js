@@ -26,6 +26,7 @@ export function handleHelp() {
 
 export function handleAdd(word, trie) {
     try {
+        if(handleFind(word,trie)) throw errorMessages.wordExists(word);
         const newWord = trie.addWord(word);
         if (newWord) printCommands.add(newWord);
         return newWord;
